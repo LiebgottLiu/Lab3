@@ -1,0 +1,35 @@
+@startuml
+
+package model{
+    class Department {
+        - name : String
+
+        + canHostProject(int duration): boolean
+    }
+
+    class Employee {
+        - name: String
+        - startDate: Date
+        - perWeekSalary: double
+        - numberOfProjects: int = 0
+
+        + formattedId(): String
+    }
+
+    class Project {
+        - name : String
+        - startDate : Date
+        - dueDate : Date
+        - estimatedDuration: int
+
+        + addTeamMember(Employee employee)
+        + removeTeamMember(Employee employee): boolean
+        + canAddTeamMember(Employee employee): boolean
+        + hasValidDates(): boolean
+    }
+}
+Department --> "*" Project
+Department --> "*" Employee
+Project --> "*" Employee : team
+
+@enduml
